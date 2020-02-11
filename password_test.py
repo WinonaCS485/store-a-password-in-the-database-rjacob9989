@@ -29,9 +29,9 @@ try:
         final_hash = hashlib.sha256(pass_salt.encode()).hexdigest()
         print("Hash and Salt: " + final_hash)
 
-
-        
-        #sql = "SELECT * from Students WHERE Name LIKE %s"
+        sql = """INSERT INTO Hash (UserName, Salt, Hash) VALUES (%s,%s,%s)"""
+        insert_tuple = (user_name, salt, final_hash)
+        cursor.execute(sql, insert_tuple)
        
         #cursor.execute(sql)
 
@@ -42,7 +42,7 @@ try:
       
         # If you INSERT, UPDATE or CREATE, the connection is not autocommit by default.
         # So you must commit to save your changes. 
-        # connection.commit()
+        connection.commit()
         
 
 finally:
